@@ -16,10 +16,21 @@ export class AuthService {
     return await bcrypt.compare(password, hash)
   }
 
+  async validateChange(user_details){
+    const user = await this.usersService.findUuid(user_details.id)
+    const result = await this.validatePassword(user_details.password, await user.password)
+
+    if (user && result) {
+      return await this.usersService.changeDetails(user_details)
+    }
+    
+    return null;
+  }
+
   async validateUser(email: string, pass: string): Promise<User$Model | null> {
     const user = await this.usersService.findOne(email);
     const result = await this.validatePassword(pass,await user.password)
-    console.log(result,pass,user.password)
+    
     if (user && result) {
       return user
     }
@@ -27,7 +38,7 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { email: user.email, sub: user.id };
+    const payload = { email: user.email, sub: user.id, role: user.role, name: user.name, status: user.status};
     return {
       access_token: this.jwtService.sign(payload),
       ...user

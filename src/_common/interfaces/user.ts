@@ -5,7 +5,7 @@ export interface User$Model extends ObjectionModel {
   uuid?: string;
   role?: number;
   status?: number;
-  email: string;
+  email?: string;
   password?: Promise<string>;
   name?: string;
   createdAt?: Date;

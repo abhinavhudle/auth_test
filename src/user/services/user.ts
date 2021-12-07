@@ -31,6 +31,14 @@ export class UserService {
     });
   }
 
+  async findUuid(id:any):Promise<any> {
+    return await this.users.firstWhere({uuid: id})
+  }
+
+  async changeDetails(user_details){
+    return this.users.updateWhere({uuid:user_details.id},{password: user_details.new_password})
+  }
+
   async findOne(email: string): Promise<User$Model | undefined> {
     return await this.users.firstWhere({email: email})
   }
