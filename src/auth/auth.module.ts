@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { AuthController } from './controllers/auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AuthTransformer } from './transformer/auth-transformer';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, AuthTransformer],
   controllers: [AuthController],
   exports: [AuthService],
 })
