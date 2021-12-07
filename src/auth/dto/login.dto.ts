@@ -4,5 +4,5 @@ export class LoginDto {
     @IsEmail()
     email: string;
     @IsAlphanumeric()
-    password: number;
+    password: string;
 }
