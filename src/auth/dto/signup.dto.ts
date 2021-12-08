@@ -1,9 +1,12 @@
-import { IsAlphanumeric, IsEmail } from "class-validator";
+import { IsAlphanumeric, IsEmail, MaxLength } from "class-validator";
 
 export class SignupDto {
-    name?: string;
+    @MaxLength(100)
+    name: string;
+
     @IsEmail()
     email: string;
+
     @IsAlphanumeric()
     password: string;
 }

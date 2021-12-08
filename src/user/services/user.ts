@@ -35,8 +35,8 @@ export class UserService {
     return await this.users.firstWhere({uuid: id})
   }
 
-  async changeDetails(user_details){
-    return this.users.updateWhere({uuid:user_details.id},{password: user_details.new_password})
+  async changeDetails(id,new_password){
+    this.users.updateWhere({uuid:id},{password: await this.encryptPassword(new_password)})
   }
 
   async findOne(email: string): Promise<User$Model | undefined> {

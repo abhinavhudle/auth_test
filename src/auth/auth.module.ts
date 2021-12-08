@@ -14,7 +14,7 @@ import { AuthTransformer } from './transformer/auth-transformer';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '240s' },
     }),
   ],
   providers: [AuthService, JwtStrategy, AuthTransformer],
